@@ -1,1 +1,0 @@
-# RishaPatel.github.io
