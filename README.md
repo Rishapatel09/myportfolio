@@ -12,8 +12,8 @@ Welcome to my personal portfolio website. This site showcases my projects, skill
 - Easy navigation  
 
 ### Contact  
-- Email: [rishapatel3941@example.com]  
-- LinkedIn: [linkedin.com/in/rishapatel](https://linkedin.com/in/rishapatel3)  
+- Email: rishapatel3941@example.com 
+- LinkedIn: [linkedin.com/in/rishapatel3](https://linkedin.com/in/rishapatel3)  
 - GitHub: [github.com/rishapatel09](https://github.com/rishapatel09)  
 
   
