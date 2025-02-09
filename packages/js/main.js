@@ -154,24 +154,32 @@ const sendEmail = (params) => {
 
 /*==================== EMAIL VALIDATION API ====================*/
 const validateEmail = (email, params) => {
-  const apiKey = "cf7383198f5a4c8a8b282a00c50dd08b";
-  const apiUrl = `https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${encodeURIComponent(
-    email
-  )}`;
+  const apiKey = "cf7383198f5a4c8a8b282a00c50dd08b"; // Replace if needed
+  const apiUrl = `https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${encodeURIComponent(email)}`;
 
   fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
-      if (data.deliverability == "DELIVERABLE") sendEmail(params);
-      else {
-        alert("Invalid email address");
-        document.getElementById("email-submit").innerHTML = `
+      console.log("API Response:", data); // Debugging log
+
+      if (data && data.deliverability) {
+        if (data.deliverability === "DELIVERABLE") {
+          sendEmail(params);
+        } else {
+          alert(`Invalid email address (${data.deliverability}). Please check your email.`);
+        }
+      } else {
+        alert("Email validation failed. API did not return expected data.");
+        console.error("Unexpected API response format:", data);
+      }
+
+      document.getElementById("email-submit").innerHTML = `
         Send message
         <i class="uil uil-message button__icon"></i>`;
-      }
     })
     .catch((error) => {
-      console.error(error);
+      console.error("API Error:", error);
+      alert("Email validation service is unavailable. Proceeding with form submission.");
       sendEmail(params);
     });
 };
@@ -180,23 +188,24 @@ const validateEmail = (email, params) => {
 document.getElementById("contact-form").addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const message = document.getElementById("message").value;
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
 
-  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  const isEmail = emailRegex.test(email);
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const isEmailValid = emailRegex.test(email);
 
-  //validate email
-  if (!isEmail) {
-    alert("Invalid email address");
-    return 0;
+  if (!isEmailValid) {
+    alert("Invalid email format. Please enter a valid email.");
+    return;
   }
 
-  const params = { name: name, email: email, message: message };
+  const params = { name, email, message };
   document.getElementById("email-submit").innerText = "Sending...";
+
   validateEmail(email, params);
 });
+
 
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".project-img").forEach((project) => {
