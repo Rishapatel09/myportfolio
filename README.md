@@ -1,6 +1,6 @@
 # Risha Patel - Portfolio  
 
-Welcome to my personal portfolio website. This site showcases my projects, skills, and experience in tech.    
+Welcome to my personal portfolio website.   
 [Visit Here](https://rishapatel09.github.io/myportfolio/)  
 
 ### Technologies Used  
@@ -17,4 +17,5 @@ Welcome to my personal portfolio website. This site showcases my projects, skill
 - GitHub: [github.com/rishapatel09](https://github.com/rishapatel09)  
 
   
+
 
